@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 const config = require('config');
 
-const db = config.get('mongoURI');
+// const db = config.get('DATABASE_URL');
 
-const connectDB = async () => {
+const connectDB = () => {
     try {
-        await mongoose.connect(db, {
+         mongoose.connect(process.env.DATABASE_URL, {
             useNewUrlParser: true
         })
-        
-        console.log('mongodb connected');
+const db = mongoose.connection
+
+        db.on('error', error => console.error(error))
+db.once('open', () => console.log('Connected to Mongoose'))
     } catch(err) {
         console.error(err.message);
         // exit process with  failure
