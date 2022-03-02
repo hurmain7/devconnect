@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://hurmain:123@devconnector.nbpeo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "8c1b002f5be228636d49",
+    "githubSecret": "e32ee1f2ce2494cadee27a9066a9c7521e93fe7e"
+}
