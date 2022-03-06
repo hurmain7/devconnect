@@ -4,6 +4,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const normalize = require('normalize-url');
 
 const { check, validationResult } = require('express-validator');
 
@@ -34,13 +35,15 @@ async (req, res) => {
             if(user) {
               return  res.status(400).json({ errors: [ { msg: 'User already exists' }]});
             }
-            
-            const avatar = await gravatar.url(email, {
-                s: '200',
-                r: 'pg',
-                d: 'mm'
-            })
-
+            const avatar = normalize(
+                gravatar.url(email, {
+                  s: '200',
+                  r: 'pg',
+                  d: 'mm'
+                }),
+                { forceHttps: true }
+              );
+            console.log(avatar);
             user = new User({ 
                 name,
                 email,
